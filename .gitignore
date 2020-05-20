@@ -1,1 +1,11 @@
 .idea
+
+.settings
+
+target/*
+
+node_modules
+
+bower_components
+
+.scss
