@@ -1,14 +1,11 @@
-**/.idea
+.idea
 
-**/node_modules
-**/bower_components
-**/.tmp
-**/.dist
-**/.sass-cache
+.settings
 
-**/.settings
-**/.metadata
-**/Servers
-**/RemoteSystemsTempFiles
+target/*
 
-**/target/*
+node_modules
+
+bower_components
+
+.scss
