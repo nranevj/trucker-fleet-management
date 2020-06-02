@@ -9,3 +9,10 @@ node_modules
 bower_components
 
 .scss
+
+help.md
+
+## Maven
+*.mvn
+mvn*
+
