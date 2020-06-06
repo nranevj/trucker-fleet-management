@@ -1,22 +1,29 @@
 package com.project.truckerfleetmanagement.controller;
 
 import com.project.truckerfleetmanagement.model.Vehicle;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.project.truckerfleetmanagement.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("vehicle")
+@RequestMapping("vehicles")
 public class VehicleController {
 
-    @PutMapping
-    public void loadVehicleDetails(@RequestBody List<Vehicle> vehicleList){
+    private VehicleService vehicleService;
 
-        for(Vehicle vehicle: vehicleList){
-            System.out.println(vehicle.getLastServiceDate());
-        }
+    @Autowired
+    public VehicleController(VehicleService vehicleService){
+        this.vehicleService = vehicleService;
+    }
+
+    @PutMapping
+    public void loadVehicleDetails(@RequestBody List<Vehicle> vehicleList){ vehicleService.addorUpdateinBulk(vehicleList); }
+
+    @GetMapping
+    public List<Vehicle> getAllVehicles(){
+        List<Vehicle> vehicleList = vehicleService.getAll();
+        return vehicleList;
     }
 }
