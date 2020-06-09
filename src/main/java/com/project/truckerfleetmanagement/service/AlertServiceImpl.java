@@ -6,7 +6,12 @@ import com.project.truckerfleetmanagement.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AlertServiceImpl implements AlertService {
@@ -47,7 +52,7 @@ public class AlertServiceImpl implements AlertService {
         }
         //Rule 2: Fuel Volume < 10% of Max Fuel Volume, Priority: MEDIUM
         else if(reading.getFuelVolume() < 0.1 * vehicle.getMaxFuelVolume()){
-            priorityInfo.setPriority(Priority.HIGH);
+            priorityInfo.setPriority(Priority.MEDIUM);
             priorityInfo.setPriorityMessage("Alert: Fuel is very low");
         }
         //Rule 3: Engine Coolant is low or Engine Light is ON, Priority: LOW
@@ -92,8 +97,22 @@ public class AlertServiceImpl implements AlertService {
         }
 
         alert.setPriority(priorityInfo);
-        //System.out.println("Vehicle "+vehicle.getVin()+" "+alert.getPriority().getPriorityMessage()+" level:"+alert.getPriority().getPriority());
 
         //Here, based on the alert, you can send SMS or email to the user or target system
+    }
+
+    @Override
+    public List<Alert> getAllAlerts(String vin){
+        List<Alert> alerts = alertRepository.findAllByVehicle_Vin(vin).stream().filter(a -> a!=null).collect(Collectors.toList());;
+        return alerts;
+    }
+
+    @Override
+    public List<Alert> getAllAlertsinLastXhours(Priority priority, int xhours){
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("UTC"));
+        LocalDateTime xhoursBefore = currentTime.plusHours(-xhours);
+        List<Alert> alerts = alertRepository.findAllByPriority_PriorityAndTimeStampGreaterThanEqual(priority, xhoursBefore);
+        alerts = alerts.stream().sorted(Comparator.comparing(Alert::getTimeStamp).reversed()).collect(Collectors.toList());
+        return alerts;
     }
 }
