@@ -37,7 +37,7 @@ public class AlertServiceImpl implements AlertService {
             alert.setVehicle(vehicle1);
             alert.setTimeStamp(reading.getTimestamp());
             generateAlert(alert, reading, vehicle1);
-            alertRepository.save(alert);
+            if(!alert.getPriority().equals(Priority.NONE)) alertRepository.save(alert);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.project.truckerfleetmanagement.service;
 
+import com.project.truckerfleetmanagement.exception.NoSuchVehicleException;
 import com.project.truckerfleetmanagement.model.Vehicle;
 import com.project.truckerfleetmanagement.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,8 @@ public class VehicleServiceImpl implements VehicleService{
     public boolean isVehicleRegistered(String vin){
         Optional<Vehicle> vehicle = vehicleRepository.getByVin(vin);
         if(!vehicle.isPresent()){
-            System.out.println("Vehicle with "+vin+" is not a registered vehicle.");
             return false;
         }
-        //vehicle.orElseThrow(()-> new NoSuchVehicleException("Vehicle with "+vin+" is not a registered vehicle."));
         return true;
     }
 
