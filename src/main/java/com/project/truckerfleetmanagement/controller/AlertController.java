@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -35,7 +36,7 @@ public class AlertController {
             @ApiResponse(responseCode = "404", description = "Vehicle Identification Number (VIN) does not exist")
     })
     @GetMapping(path = "{VIN}", produces = {"application/json", "application/xml"})
-    public List<Alert> getAllAlerts(@Parameter(description = "Vehicle Identification Number (VIN)") @PathVariable("VIN") String vin){
+    public List<Alert> getAllAlerts(@Parameter(description = "Vehicle Identification Number (VIN)") @Valid @PathVariable("VIN") String vin){
         List<Alert> alerts = alertService.getAll(vin);
         return alerts;
     }
@@ -47,7 +48,7 @@ public class AlertController {
             @ApiResponse(responseCode = "400", description = "Wrong content type provided for priority level or hours")
     })
     @GetMapping(path = "{alertLevel}/{Xhours}", produces = {"application/json", "application/xml"})
-    public List<Alert> getAllAlertsinLastXhours(@Parameter(description = "Alert priority level") @PathVariable("alertLevel") Priority priority, @Parameter(description = "Hours", example = "2") @PathVariable("Xhours") int xhours){
+    public List<Alert> getAllAlertsinLastXhours(@Parameter(description = "Alert priority level") @Valid @PathVariable("alertLevel") Priority priority, @Parameter(description = "Hours", example = "2") @PathVariable("Xhours") int xhours){
        List<Alert> alerts = alertService.getAllinLastXhours(priority, xhours);
        return alerts;
     }
