@@ -1,13 +1,11 @@
 package com.project.truckerfleetmanagement.service;
 
-import com.project.truckerfleetmanagement.exception.NoSuchVehicleException;
 import com.project.truckerfleetmanagement.model.Vehicle;
 import com.project.truckerfleetmanagement.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -63,14 +61,6 @@ public class VehicleServiceImpl implements VehicleService{
     public void addorUpdateinBulk(List<Vehicle> vehicleList){
         for(Vehicle vehicle: vehicleList){
             addorUpdate(vehicle);
-        }
-    }
-
-    @Override
-    public void deleteByvin(String vin){
-        Optional<Vehicle> vehicle1 = vehicleRepository.getByVin(vin);
-        if(vehicle1.isPresent()) {
-            vehicleRepository.delete(vehicle1.get());
         }
     }
 }

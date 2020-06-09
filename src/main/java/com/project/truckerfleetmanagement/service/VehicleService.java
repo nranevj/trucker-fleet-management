@@ -3,7 +3,6 @@ package com.project.truckerfleetmanagement.service;
 import com.project.truckerfleetmanagement.model.Vehicle;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface VehicleService {
     List<Vehicle> getAll();
@@ -13,6 +12,4 @@ public interface VehicleService {
     public void addorUpdate(Vehicle vehicle);
 
     public void addorUpdateinBulk(List<Vehicle> vehicleList);
-
-    public void deleteByvin(String vin);
 }

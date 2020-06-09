@@ -1,6 +1,5 @@
 package com.project.truckerfleetmanagement.controller;
 
-import com.project.truckerfleetmanagement.model.Alert;
 import com.project.truckerfleetmanagement.model.Vehicle;
 import com.project.truckerfleetmanagement.service.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,7 +32,7 @@ public class VehicleController {
             @ApiResponse(responseCode = "400", description = "Wrong content type for vehicle")
     })
     @PutMapping
-    public void loadVehicleDetails(@Parameter(description = "List of vehicles to update") @RequestBody List<Vehicle> vehicleList){ vehicleService.addorUpdateVehiclesinBulk(vehicleList); }
+    public void loadVehicleDetails(@Parameter(description = "List of vehicles to update") @RequestBody List<Vehicle> vehicleList){ vehicleService.addorUpdateinBulk(vehicleList); }
 
     @Operation(summary = "Find all vehicles", tags = {"vehicles"})
     @ApiResponses(value ={
@@ -42,7 +41,7 @@ public class VehicleController {
     })
     @GetMapping(produces = {"application/json", "application/xml"})
     public List<Vehicle> getAllVehicles(){
-        List<Vehicle> vehicleList = vehicleService.getAllVehicles();
+        List<Vehicle> vehicleList = vehicleService.getAll();
         return vehicleList;
     }
 }
