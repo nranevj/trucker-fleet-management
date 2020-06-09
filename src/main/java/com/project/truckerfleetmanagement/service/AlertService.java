@@ -8,8 +8,8 @@ import com.project.truckerfleetmanagement.model.Vehicle;
 import java.util.List;
 
 public interface AlertService{
-    public void addAlert(Reading reading);
-    public void generateAlert(Alert alert, Reading reading, Vehicle vehicle);
-    public List<Alert> getAllAlerts(String vin);
-    public List<Alert> getAllAlertsinLastXhours(Priority priority, int xhours);
+    void addAlert(Reading reading);
+    void generateAlert(Alert alert, Reading reading, Vehicle vehicle);
+    List<Alert> getAll(String vin);
+    List<Alert> getAllinLastXhours(Priority priority, int xhours);
 }

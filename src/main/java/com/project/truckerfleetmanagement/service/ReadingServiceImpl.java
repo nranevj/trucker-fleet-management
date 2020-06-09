@@ -9,17 +9,14 @@ import org.springframework.stereotype.Service;
 public class ReadingServiceImpl implements ReadingService{
 
     private ReadingRepository readingRepository;
-    private VehicleService vehicleService;
 
     @Autowired
-    public ReadingServiceImpl(ReadingRepository readingRepository, VehicleService vehicleService){
+    public ReadingServiceImpl(ReadingRepository readingRepository){
         this.readingRepository = readingRepository;
-        this.vehicleService = vehicleService;
     }
 
     @Override
     public void addReading(Reading reading){
-        System.out.println(reading.getVin());
         readingRepository.save(reading);
     }
 }

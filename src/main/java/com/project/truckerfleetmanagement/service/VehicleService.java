@@ -6,10 +6,7 @@ import java.util.List;
 
 public interface VehicleService {
     List<Vehicle> getAll();
-
-    public boolean isVehicleRegistered(String vin);
-
-    public void addorUpdate(Vehicle vehicle);
-
-    public void addorUpdateinBulk(List<Vehicle> vehicleList);
+    boolean isVehicleRegistered(String vin);
+    void addorUpdate(Vehicle vehicle);
+    void addorUpdateinBulk(List<Vehicle> vehicleList);
 }

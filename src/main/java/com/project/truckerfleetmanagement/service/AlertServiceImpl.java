@@ -102,13 +102,13 @@ public class AlertServiceImpl implements AlertService {
     }
 
     @Override
-    public List<Alert> getAllAlerts(String vin){
+    public List<Alert> getAll(String vin){
         List<Alert> alerts = alertRepository.findAllByVehicle_Vin(vin).stream().filter(a -> a!=null).collect(Collectors.toList());;
         return alerts;
     }
 
     @Override
-    public List<Alert> getAllAlertsinLastXhours(Priority priority, int xhours){
+    public List<Alert> getAllinLastXhours(Priority priority, int xhours){
         LocalDateTime currentTime = LocalDateTime.now(ZoneId.of("UTC"));
         LocalDateTime xhoursBefore = currentTime.plusHours(-xhours);
         List<Alert> alerts = alertRepository.findAllByPriority_PriorityAndTimeStampGreaterThanEqual(priority, xhoursBefore);

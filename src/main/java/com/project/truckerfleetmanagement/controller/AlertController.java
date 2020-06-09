@@ -36,7 +36,7 @@ public class AlertController {
     })
     @GetMapping(path = "{VIN}", produces = {"application/json", "application/xml"})
     public List<Alert> getAllAlerts(@Parameter(description = "Vehicle Identification Number (VIN)") @PathVariable("VIN") String vin){
-        List<Alert> alerts = alertService.getAllAlerts(vin);
+        List<Alert> alerts = alertService.getAll(vin);
         return alerts;
     }
 
@@ -48,7 +48,7 @@ public class AlertController {
     })
     @GetMapping(path = "{alertLevel}/{Xhours}", produces = {"application/json", "application/xml"})
     public List<Alert> getAllAlertsinLastXhours(@Parameter(description = "Alert priority level") @PathVariable("alertLevel") Priority priority, @Parameter(description = "Hours", example = "2") @PathVariable("Xhours") int xhours){
-       List<Alert> alerts = alertService.getAllAlertsinLastXhours(priority, xhours);
+       List<Alert> alerts = alertService.getAllinLastXhours(priority, xhours);
        return alerts;
     }
 }
