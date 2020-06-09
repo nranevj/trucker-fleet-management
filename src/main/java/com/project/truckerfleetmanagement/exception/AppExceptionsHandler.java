@@ -20,4 +20,13 @@ public class AppExceptionsHandler extends ResponseEntityExceptionHandler {
           errorMessageDescription, new HttpHeaders(), HttpStatus.NOT_FOUND
         );
     }
+
+    @ExceptionHandler(value = {InvalidDataException.class})
+    public ResponseEntity<Object> handleInvalidDataException(InvalidDataException ex){
+        String errorMessageDescription = ex.getLocalizedMessage();
+        if(errorMessageDescription == null) errorMessageDescription = ex.toString();
+        return new ResponseEntity<>(
+                errorMessageDescription, new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY
+        );
+    }
 }

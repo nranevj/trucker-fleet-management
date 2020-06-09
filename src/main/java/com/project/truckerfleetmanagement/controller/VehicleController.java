@@ -29,7 +29,7 @@ public class VehicleController {
     @Operation(summary = "Update vehicles", description = "Add vehicles if doesn't exist", tags = {"vehicles"})
     @ApiResponses(value ={
             @ApiResponse(responseCode = "200", description = "Vehicle details added successfully"),
-            @ApiResponse(responseCode = "400", description = "Wrong content type for vehicle")
+            @ApiResponse(responseCode = "400", description = "Wrong content type for vehicle. Ensure all fields of all vehicles (in input) match their respective type")
     })
     @PutMapping
     public void loadVehicleDetails(@Parameter(description = "List of vehicles to update") @RequestBody List<Vehicle> vehicleList){ vehicleService.addorUpdateinBulk(vehicleList); }
